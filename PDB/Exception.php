@@ -1,46 +1,61 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * A simplistic wrapper for PDO
+ * Base {@link PDB} Exception
  *
- * PDB is a simplistic wrapper that adds helper functions to PDO. It was
- * creatd in the vain of DB and MDB2, but a pure PHP5/PDO implementation.
+ * PHP version 5.2+
  *
- * PHP version 5
+ * Copyright (c) 2007, Digg, Inc.
+ * 
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without 
+ * modification, are permitted provided that the following conditions are met:
  *
- * LICENSE: This source file is subject to version 3.0 of the PHP license
- * that is available through the world-wide-web at the following URI:
- * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
- * the PHP License and are unable to obtain it through the web, please
- * send a note to license@php.net so we can mail you a copy immediately.
+ *  - Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *  - Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *  - Neither the name of the The PEAR Group nor the names of its contributors 
+ *    may be used to endorse or promote products derived from this software 
+ *    without specific prior written permission.
  *
- * @category    DB
- * @package     PDB
- * @author      Joe Stump <joe@joestump.net> 
- * @copyright   1997-2005 The PHP Group
- * @license     http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version     CVS: $Id:$
- * @link        http://www.php.net/pdo
- * @link        http://pear.php.net/package/PDB
- * @filesource
- */
-
-require_once 'PEAR/Exception.php';
-
-/**
- * Exception class for PDB
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+ * POSSIBILITY OF SUCH DAMAGE.
  *
  * @category   DB
  * @package    PDB
  * @author     Joe Stump <joe@joestump.net> 
- * @copyright  1997-2007 The PHP Group
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @copyright  2007-2008 (c) Digg.com 
+ * @license    http://tinyurl.com/42zef New BSD License
+ * @version    CVS: $Id:$
+ * @link       http://www.php.net/pdo
+ * @link       http://pear.php.net/package/PDB
+ * @filesource
+ */
+
+/**
+ * Base PDB Exception
+ *
+ * @category   DB
+ * @package    PDB
+ * @author     Joe Stump <joe@joestump.net> 
+ * @copyright  2007-2008 (c) Digg.com 
+ * @license    http://tinyurl.com/42zef New BSD License
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/PDB
  */
-class PDB_Exception extends PEAR_Exception
+class PDB_Exception extends Exception
 {
 
 }

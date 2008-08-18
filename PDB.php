@@ -8,20 +8,42 @@
  *
  * PHP version 5
  *
- * LICENSE: This source file is subject to version 3.0 of the PHP license
- * that is available through the world-wide-web at the following URI:
- * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
- * the PHP License and are unable to obtain it through the web, please
- * send a note to license@php.net so we can mail you a copy immediately.
+ * Copyright (c) 2007, Digg, Inc.
+ * 
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without 
+ * modification, are permitted provided that the following conditions are met:
  *
- * @category    DB
- * @package     PDB
- * @author      Joe Stump <joe@joestump.net> 
- * @copyright   1997-2005 The PHP Group
- * @license     http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version     CVS: $Id:$
- * @link        http://www.php.net/pdo
- * @link        http://pear.php.net/package/PDB
+ *  - Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *  - Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *  - Neither the name of the The PEAR Group nor the names of its contributors 
+ *    may be used to endorse or promote products derived from this software 
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @category   DB
+ * @package    PDB
+ * @author     Joe Stump <joe@joestump.net> 
+ * @copyright  2007-2008 (c) Digg.com 
+ * @license    http://tinyurl.com/42zef New BSD License
+ * @version    CVS: $Id:$
+ * @link       http://www.php.net/pdo
+ * @link       http://pear.php.net/package/PDB
  * @filesource
  */
 
@@ -31,8 +53,8 @@
  * @category   DB
  * @package    PDB
  * @author     Joe Stump <joe@joestump.net> 
- * @copyright  1997-2007 The PHP Group
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @copyright  2007-2008 (c) Digg.com 
+ * @license    http://tinyurl.com/42zef New BSD License
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/PDB
  */
@@ -41,17 +63,24 @@ abstract class PDB
     /**
      * Singleton connections
      *
-     * @access      private
-     * @var         array       $singletons
-     * @static
+     * @see PDB::singleton()
+     * @var array $singletons
      */
-    static private $singletons = array();
+    static protected $singletons = array();
 
     /**
      * Connect to a database
      *
-     * @access      public
-     * @static
+     * @param string $dsn      PDO DSN (e.g. mysql:host=127.0.0.1:dbname=foo)
+     * @param string $username The DB username 
+     * @param string $password The DB password
+     * @param array  $options  PDO options
+     *
+     * @access public
+     * @throws {@link PDB_Exception} when unable to connect
+     * @link http://us.php.net/manual/en/pdo.constants.php
+     * @link http://us.php.net/manual/en/pdo.construct.php
+     * @return object Instance of PDB driver
      */
     public static function connect($dsn, 
                                    $username = null,
@@ -61,7 +90,7 @@ abstract class PDB
         list($type,) = explode(':', $dsn);
 
         $file = 'PDB/' . $type . '.php';
-        require_once $file;
+        include_once $file;
 
         $class = 'PDB_' . $type;
         if (!class_exists($class)) {
@@ -78,15 +107,17 @@ abstract class PDB
     }
 
     /**
-     * Singleton connections
+     * Create a singleton DB connection
      *
-     * @access      public
-     * @param       string      $dsn
-     * @param       string      $username
-     * @param       string      $password
-     * @param       array       $options
-     * @return      object      Instance of PDB driver
-     * @throws      PDB_Exception
+     * @param string $dsn      PDO DSN (e.g. mysql:host=127.0.0.1:dbname=foo)
+     * @param string $username The DB username 
+     * @param string $password The DB password
+     * @param array  $options  PDO options
+     *
+     * @access public
+     * @return object Instance of PDB driver
+     * @throws {@link PDB_Exception} when unable to connect
+     * @link http://us.php.net/manual/en/pdo.construct.php
      */
     static public function singleton($dsn,
                                      $username = null,
