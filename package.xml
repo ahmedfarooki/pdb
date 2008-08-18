@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<package version="2.0" xmlns="http://pear.php.net/dtd/package-2.0"
+    xmlns:tasks="http://pear.php.net/dtd/tasks-1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+                        http://pear.php.net/dtd/tasks-1.0.xsd
+                        http://pear.php.net/dtd/package-2.0
+                        http://pear.php.net/dtd/package-2.0.xsd">
+    <name>PDB</name>
+    <channel>pear.digg.internal</channel>
+    <summary>A simplistic wrapper for PDO</summary>
+    <description>PDB is a simplistic wrapper that adds helper functions to PDO. It was creatd in the vain of DB and MDB2, but a pure PHP5/PDO implementation.</description>
+    <lead>
+        <name>Joe Stump</name>
+        <user>jstump</user>
+        <email>joe@joestump.net</email>
+        <active>yes</active>
+    </lead>
+    <date>2008-08-18</date>
+    <version>
+        <release>0.0.1</release>
+        <api>0.0.1</api>
+    </version>
+    <stability>
+        <release>alpha</release>
+        <api>alpha</api>
+    </stability>
+    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+    <notes>
+        * Initial release
+    </notes>
+    <contents>
+        <dir name="/">
+            <file name="PDB.php" role="php" />
+            <dir name="PDB">
+                <file name="Common.php" role="php" />
+                <file name="Exception.php" role="php" />
+                <file name="Result.php" role="php" />
+                <file name="mysql.php" role="php" />
+            </dir>
+        </dir>
+    </contents>
+    <dependencies>
+        <required>
+            <php>
+                <min>5.2</min>
+            </php>
+            <pearinstaller>
+                <min>1.4.0b1</min>
+            </pearinstaller>
+            <extension>
+                <name>pdo</name>
+            </extension>
+        </required>
+    </dependencies>
+    <phprelease/>
+    <changelog>
+    </changelog>
+</package>
