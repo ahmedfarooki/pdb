@@ -16,7 +16,7 @@
         <email>joe@joestump.net</email>
         <active>yes</active>
     </lead>
-    <date>2008-05-14</date>
+    <date>2008-08-18</date>
     <version>
         <release>0.0.2</release>
         <api>0.0.2</api>
@@ -25,9 +25,9 @@
         <release>alpha</release>
         <api>alpha</api>
     </stability>
-    <license uri="http://www.php.net/license">PHP License</license>
+    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes>
-        * Fixed a reference problem with passing PDO instance to PDB_Result
+        * Initial release
     </notes>
     <contents>
         <dir name="/">
@@ -36,22 +36,18 @@
                 <file name="Common.php" role="php" />
                 <file name="Exception.php" role="php" />
                 <file name="Result.php" role="php" />
+                <file name="mysql.php" role="php" />
             </dir>
         </dir>
     </contents>
     <dependencies>
         <required>
             <php>
-                <min>5.1</min>
+                <min>5.2</min>
             </php>
             <pearinstaller>
                 <min>1.4.0b1</min>
             </pearinstaller>
-            <package>
-                <name>PEAR</name>
-                <channel>pear.php.net</channel>
-                <min>1.4.0b1</min>
-            </package>
             <extension>
                 <name>pdo</name>
             </extension>
@@ -59,31 +55,5 @@
     </dependencies>
     <phprelease/>
     <changelog>
-        <release>
-           <date>2007-05-03</date>
-           <version>
-               <release>0.0.1</release>
-               <api>0.0.1</api>
-           </version>
-           <stability>
-               <release>alpha</release>
-               <api>alpha</api>
-           </stability>
-           <license uri="http://www.php.net/license">PHP License</license>
-           <notes>
-               * Initial release
-           </notes>
-           <contents>
-               <dir name="/">
-                   <file name="PDB.php" role="php" />
-                   <dir name="PDB">
-                       <file name="Common.php" role="php" />
-                       <file name="Exception.php" role="php" />
-                       <file name="Result.php" role="php" />
-                       <file name="mysql.php" role="php" />
-                   </dir>
-               </dir>
-           </contents>
-        </release>
     </changelog>
 </package>
