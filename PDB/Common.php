@@ -464,12 +464,12 @@ abstract class PDB_Common
     public function setFetchMode($mode)
     {
         switch ($mode) {
-        case PDO::FETCH_LAZY
-        case PDO::FETCH_ASSOC
-        case PDO::FETCH_NAMED
-        case PDO::FETCH_NUM
-        case PDO::FETCH_BOTH
-        case PDO::FETCH_OBJ
+        case PDO::FETCH_LAZY:
+        case PDO::FETCH_ASSOC:
+        case PDO::FETCH_NAMED:
+        case PDO::FETCH_NUM:
+        case PDO::FETCH_BOTH:
+        case PDO::FETCH_OBJ:
             $this->fetchMode = $mode;
             break;
         default:
@@ -488,7 +488,7 @@ abstract class PDB_Common
      */
     public function setAttribute($attribute, $value)
     {
-        if (parent::setAttribute($attribute, $value)) {
+        if ($this->pdo->setAttribute($attribute, $value)) {
             $this->options[$attribute] = $value;
             return true;
         }
