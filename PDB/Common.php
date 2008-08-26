@@ -226,7 +226,7 @@ abstract class PDB_Common
      * 
      * require_once 'PDB.php';
      *
-     * $db = PDB::connect('mysql:host=127.0.0.1:dbname=foo', 'user', 'pass'); 
+     * $db = PDB::connect('mysql:host=127.0.0.1;dbname=foo', 'user', 'pass'); 
      * $db->setFetchMode(PDO::FETCH_OBJECT);
      *
      * $sql = 'SELECT * 
@@ -286,7 +286,7 @@ abstract class PDB_Common
      * 
      * require_once 'PDB.php';
      *
-     * $db = PDB::connect('mysql:host=127.0.0.1:dbname=foo', 'user', 'pass'); 
+     * $db = PDB::connect('mysql:host=127.0.0.1;dbname=foo', 'user', 'pass'); 
      * $db->setFetchMode(PDO::FETCH_OBJECT);
      *
      * $sql = 'SELECT * 
@@ -326,7 +326,7 @@ abstract class PDB_Common
      * 
      * require_once 'PDB.php';
      *
-     * $db  = PDB::connect('mysql:host=127.0.0.1:dbname=foo', 'user', 'pass'); 
+     * $db  = PDB::connect('mysql:host=127.0.0.1;dbname=foo', 'user', 'pass'); 
      * $sql = 'SELECT friendid 
      *         FROM friends
      *         WHERE userid = ?';
@@ -368,7 +368,7 @@ abstract class PDB_Common
      * 
      * require_once 'PDB.php';
      *
-     * $db = PDB::connect('mysql:host=127.0.0.1:dbname=foo', 'user', 'pass'); 
+     * $db = PDB::connect('mysql:host=127.0.0.1;dbname=foo', 'user', 'pass'); 
      * $db->setFetchMode(PDO::FETCH_OBJECT);
      * 
      * $sql = 'SELECT * 
@@ -418,7 +418,7 @@ abstract class PDB_Common
      * 
      * require_once 'PDB.php';
      *
-     * $db  = PDB::connect('mysql:host=127.0.0.1:dbname=foo', 'user', 'pass'); 
+     * $db  = PDB::connect('mysql:host=127.0.0.1;dbname=foo', 'user', 'pass'); 
      * $sql = 'SELECT COUNT(*) AS total
      *         FROM users
      *         WHERE type = ?';
