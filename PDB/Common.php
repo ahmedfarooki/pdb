@@ -258,15 +258,16 @@ abstract class PDB_Common
         try {
             $stmt = $this->prepare($sql, array(
                 PDO::ATTR_STATEMENT_CLASS => array(
-                    'PDB_Result', array($this->pdo)
+                    'PDB_Result', array($this->pdo, $this->fetchMode)
                 )
             ));
 
             if (is_array($args)) {
                 $cnt = count($args);
                 if ($cnt > 0) {
-                    for ($i = 0 ; $i < $cnt ; $i++) {
-                        $result = $stmt->bindParam(($i + 1), $args[$i]);
+                    foreach ($args as $key => $value) {
+                        $param  = (is_int($key) ? ($key + 1) : $key);
+                        $result = $stmt->bindParam($param, $args[$key]);
                     }
                 }
             }
