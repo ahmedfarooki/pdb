@@ -7,7 +7,7 @@
                         http://pear.php.net/dtd/package-2.0
                         http://pear.php.net/dtd/package-2.0.xsd">
     <name>PDB</name>
-    <channel>pear.php.net</channel>
+    <channel>pear.digg.internal</channel>
     <summary>A simplistic wrapper for PDO</summary>
     <description>PDB is a simplistic wrapper that adds helper functions to PDO. It was creatd in the vain of DB and MDB2, but a pure PHP5/PDO implementation.</description>
     <lead>
