@@ -66,6 +66,14 @@ class PDB_Result extends PDOStatement
     protected $pdo = null;
 
     /**
+     * Default fetch mode
+     *
+     * @access protected
+     * @var integer $fetchMode The PDO fetch mode
+     */
+    protected $fetchMode = PDO::FETCH_NUM;
+
+    /**
      * Constructor
      *
      * @param object $pdo Instance of PDO
@@ -73,9 +81,10 @@ class PDB_Result extends PDOStatement
      * @access protected
      * @see PDB_Result::$pdo
      */
-    protected function __construct(PDO $pdo)
+    protected function __construct(PDO $pdo, $fetchMode)
     {
-        $this->pdo = $pdo;
+        $this->pdo       = $pdo;
+        $this->fetchMode = $fetchMode;
     }
 
     /**
@@ -90,7 +99,7 @@ class PDB_Result extends PDOStatement
     public function fetchRow($fetchMode = null)
     {
         if (is_null($fetchMode)) {
-            $fetchMode = $this->pdo->fetchMode;
+            $fetchMode = $this->fetchMode;
         }
 
         $res = $this->fetch($fetchMode); 
@@ -110,7 +119,7 @@ class PDB_Result extends PDOStatement
     public function fetchInto(&$arr, $fetchMode = null)
     {
         if (is_null($fetchMode)) {
-            $fetchMode = $this->pdo->fetchMode;
+            $fetchMode = $this->fetchMode;
         }
 
         $arr = $this->fetch($fetchMode);        

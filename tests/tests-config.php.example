@@ -1,0 +1,9 @@
+<?php
+
+$GLOBALS['PDB_mysqlTest'] = array(
+    'dsn'      => 'mysql:host=192.168.0.222;dbname=testing',
+    'username' => 'yourname',
+    'password' => 'secretpassword'
+); 
+
+?>
