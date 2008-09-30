@@ -86,7 +86,7 @@ class PDB_mysql extends PDB_Common
                 return parent::query($sql, $args);
             } catch (PDB_Exception $e) {
                 $info = $this->errorInfo();
-                if (isset($info[1]) && $info[1] == 2006) {
+                if (is_array($info) && isset($info[1]) && $info[1] == 2006) {
                     $this->reconnect();
                 } else {
                     throw $e;
