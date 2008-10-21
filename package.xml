@@ -7,7 +7,7 @@
                         http://pear.php.net/dtd/package-2.0
                         http://pear.php.net/dtd/package-2.0.xsd">
     <name>PDB</name>
-    <channel>pear.digg.internal</channel>
+    <channel>pear.php.net</channel>
     <summary>A simplistic wrapper for PDO</summary>
     <description>PDB is a simplistic wrapper that adds helper functions to PDO. It was creatd in the vain of DB and MDB2, but a pure PHP5/PDO implementation.</description>
     <lead>
@@ -16,9 +16,9 @@
         <email>joe@joestump.net</email>
         <active>yes</active>
     </lead>
-    <date>2008-09-30</date>
+    <date>2008-10-21</date>
     <version>
-        <release>0.0.2</release>
+        <release>0.0.3</release>
         <api>0.0.2</api>
     </version>
     <stability>
@@ -27,7 +27,8 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes>
-        * Fixed a notice in PDB_mysql
+        * Added PDB_sqlite driver (ieure)
+        * Fixed a fatal error in PDB_Common, where an Exception was constructed with a non-integer error code. (ieure)
     </notes>
     <contents>
         <dir name="/">
@@ -70,6 +71,14 @@
                                    to="name"/>
                     <tasks:replace type="package-info" 
                                    from="@package-version@" 
+                                   to="version"/>
+                </file>
+                <file name="sqlite.php" role="php">
+                    <tasks:replace type="package-info"
+                                   from="@package-name@"
+                                   to="name"/>
+                    <tasks:replace type="package-info"
+                                   from="@package-version@"
                                    to="version"/>
                 </file>
             </dir>

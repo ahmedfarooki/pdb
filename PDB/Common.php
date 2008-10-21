@@ -5,7 +5,7 @@
  *
  * PHP version 5.2+
  *
- * Copyright (c) 2007, Digg, Inc.
+ * Copyright (c) 2007, 2008, Digg, Inc.
  * 
  * All rights reserved.
  * 
@@ -275,7 +275,7 @@ abstract class PDB_Common
             $stmt->execute();
             return $stmt;
         } catch (PDOException $error) {
-            throw new PDB_Exception($error->getMessage(), $error->getCode());
+            throw new PDB_Exception($error->getMessage(), (int) $error->getCode());
         }
     }
 
