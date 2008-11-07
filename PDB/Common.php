@@ -80,6 +80,13 @@ abstract class PDB_Common
      * @var string $dsn PDO DSN (e.g. mysql:host=127.0.0.1;dbname=foo)
      */
     protected $dsn = '';
+    
+    /**
+     * DNS info as an stdClass
+     *
+     * @var stdClass
+     */
+    protected $dsnObject = null;    
 
     /**
      * Username for DB connection
@@ -87,7 +94,7 @@ abstract class PDB_Common
      * @access protected
      * @var string $username DB username
      */
-    protected $username = ''; 
+    protected $user = ''; 
 
     /**
      * Password for DB connection
@@ -95,7 +102,7 @@ abstract class PDB_Common
      * @access protected
      * @var string $password DB password
      */
-    protected $password = '';
+    protected $pass = '';
 
     /**
      * PDO/Driver options
@@ -133,8 +140,8 @@ abstract class PDB_Common
                                 $options = array())
     {
         $this->dsn      = $dsn;
-        $this->username = $username;
-        $this->password = $password;
+        $this->user     = $username;
+        $this->pass     = $password;
         $this->options  = $options;
         $this->connect();
     }
@@ -150,8 +157,8 @@ abstract class PDB_Common
     public function connect()
     {
         $this->pdo = new PDO($this->dsn, 
-                             $this->username, 
-                             $this->password, 
+                             $this->user, 
+                             $this->pass, 
                              $this->options);
 
         $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -182,6 +189,29 @@ abstract class PDB_Common
     {
         $this->pdo = null;
     }
+    
+   /**
+     * Get DSN as an stdClass
+     *
+     * @return stdClass The DNS info in an stdClass
+     */
+    public function getDSN() {
+        if ($this->dsnObject == null) {
+            list($type, $parseMe) = explode(':', $this->dsn);
+            $parseMe              = str_replace(';', '&', $parseMe);
+            
+            $dsnParts = array();
+            parse_str($parseMe, $dsnParts);
+            
+            $dsnParts['user'] = $this->username;
+            $dsnParts['pass'] = $this->password;
+            $dsnParts['type'] = $type;
+            
+            $this->dsnObject = (object) $dsnParts;
+        }
+        
+        return $this->dsnObject;
+    }       
 
     /**
      * Implement decorator pattern

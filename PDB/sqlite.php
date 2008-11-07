@@ -59,6 +59,21 @@ require_once 'PDB/Common.php';
  */
 class PDB_sqlite extends PDB_Common
 {
+    /**
+     * Get DSN as an stdClass
+     *
+     * @return stdClass The DNS info in an stdClass
+     */
+    public function getDSN() {
+        if ($this->dsnObject == null) {
+            $this->dsnObject = new stdClass;
+            
+            list($this->dsnObject->type, 
+                 $this->dsnObject->dbname) = explode(':', $this->dsn, 2);
+        }
+        
+        return $this->dsnObject;
+    }
 }
 
 ?>
