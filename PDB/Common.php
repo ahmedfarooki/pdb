@@ -202,11 +202,13 @@ abstract class PDB_Common
             
             $dsnParts = array();
             parse_str($parseMe, $dsnParts);
-            
-            $dsnParts['user'] = $this->username;
-            $dsnParts['pass'] = $this->password;
+
+            $dsnParts['name'] = $dsnParts['dbname'];
+            $dsnParts['user'] = $this->user;
+            $dsnParts['pass'] = $this->pass;
             $dsnParts['type'] = $type;
             
+            unset($dsnParts['dbname']);
             $this->dsnObject = (object) $dsnParts;
         }
         
