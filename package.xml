@@ -18,7 +18,7 @@
     </lead>
     <date>2008-12-23</date>
     <version>
-        <release>0.0.5</release>
+        <release>0.0.6</release>
         <api>0.0.2</api>
     </version>
     <stability>
@@ -27,7 +27,7 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes>
-        * Fix PDB_Common::setFetchMode(), fixes issue #2 (ieure)
+        * Really fix PDB_Common::setFetchMode(), fixes issue #2 (ieure)
     </notes>
     <contents>
         <dir name="/">
