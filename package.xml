@@ -16,9 +16,9 @@
         <email>joe@joestump.net</email>
         <active>yes</active>
     </lead>
-    <date>2008-10-21</date>
+    <date>2008-12-09</date>
     <version>
-        <release>0.0.3</release>
+        <release>0.0.4</release>
         <api>0.0.2</api>
     </version>
     <stability>
@@ -27,8 +27,7 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes>
-        * Added PDB_sqlite driver (ieure)
-        * Fixed a fatal error in PDB_Common, where an Exception was constructed with a non-integer error code. (ieure)
+        * add Muuttaa compatible getDSN method to Common and PDB_sqlite
     </notes>
     <contents>
         <dir name="/">
