@@ -506,7 +506,7 @@ abstract class PDB_Common
             $this->fetchMode = $mode;
             break;
         default:
-            throw new UnexpectedArgumentException('Invalid mode');
+            throw new InvalidArgumentException('Invalid mode');
         }
     }
 
