@@ -16,9 +16,9 @@
         <email>joe@joestump.net</email>
         <active>yes</active>
     </lead>
-    <date>2008-12-09</date>
+    <date>2008-12-23</date>
     <version>
-        <release>0.0.4</release>
+        <release>0.0.5</release>
         <api>0.0.2</api>
     </version>
     <stability>
@@ -27,7 +27,7 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes>
-        * add Muuttaa compatible getDSN method to Common and PDB_sqlite
+        * Fix PDB_Common::setFetchMode(), fixes issue #2 (ieure)
     </notes>
     <contents>
         <dir name="/">
