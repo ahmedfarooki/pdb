@@ -16,9 +16,9 @@
         <email>joe@joestump.net</email>
         <active>yes</active>
     </lead>
-    <date>2008-12-23</date>
+    <date>2009-01-07</date>
     <version>
-        <release>0.0.6</release>
+        <release>0.0.7</release>
         <api>0.0.2</api>
     </version>
     <stability>
@@ -27,7 +27,7 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes>
-        * Really fix PDB_Common::setFetchMode(), fixes issue #2 (ieure)
+        * Fix MySQL reconnect logic, which was broken.
     </notes>
     <contents>
         <dir name="/">
