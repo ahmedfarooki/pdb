@@ -5,7 +5,7 @@
  *
  * PHP version 5.2+
  *
- * Copyright (c) 2007, Digg, Inc.
+ * Copyright (c) 2007, 2009, Digg, Inc.
  * 
  * All rights reserved.
  * 
@@ -85,8 +85,7 @@ class PDB_mysql extends PDB_Common
             try {
                 return parent::query($sql, $args);
             } catch (PDB_Exception $e) {
-                $info = $this->errorInfo();
-                if (is_array($info) && isset($info[1]) && $info[1] == 2006) {
+                if (strpos($e->getMessage(), '2006 MySQL') !== false) {
                     $this->reconnect();
                 } else {
                     throw $e;
