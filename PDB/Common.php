@@ -348,7 +348,9 @@ abstract class PDB_Common
         }
 
         $result = $this->query($sql, $params);
-        return $result->fetchRow($fetchMode);
+        $res = $result->fetchRow($fetchMode);
+        $result->closeCursor();
+        return $res;
     }
 
     /**
@@ -387,6 +389,7 @@ abstract class PDB_Common
             $ret[] = $row[$col];
         }
 
+        $result->closeCursor();
         return $ret;
     }
 
@@ -436,6 +439,7 @@ abstract class PDB_Common
         while ($row = $result->fetchRow($fetchMode)) {
             $ret[] = $row;
         }
+        $result->closeCursor();
 
         return $ret;
     }
@@ -474,6 +478,7 @@ abstract class PDB_Common
     {
         $result = $this->query($sql, $params);
         $row    = $result->fetchRow(PDO::FETCH_NUM);
+        $result->closeCursor();
         return $row[0];
     }
 
