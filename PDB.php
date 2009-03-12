@@ -61,6 +61,21 @@
 abstract class PDB
 {
     /**
+     * All PDB-specific attributes have this bit set
+     *
+     * @var int
+     */
+    const PDB_ATTRS = 0xf0000;
+
+    /**
+     * Whether PDB should attempt to reconnect when we get a "2006
+     * MySQL server has gone away" exception.
+     *
+     * @var int
+     */
+    const RECONNECT = 0xf0001;
+
+    /**
      * Singleton connections
      *
      * @see PDB::singleton()

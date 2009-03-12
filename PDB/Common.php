@@ -46,6 +46,7 @@
 
 require_once 'PDB/Exception.php';
 require_once 'PDB/Result.php';
+require_once 'Pattern/Acceptor/Common.php';
 
 /**
  * Base PDB class
@@ -58,20 +59,14 @@ require_once 'PDB/Result.php';
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/PDB
  */
-abstract class PDB_Common 
+abstract class PDB_Common extends Pattern_Acceptor_Common
 {
     /**
-     * The PDO connection
-     * 
-     * Due to various issues with PDO (e.g. the inability to disconnect)
-     * we use the decorator pattern to envelope PDO with extra
-     * functionality. 
-     * 
-     * @var object $pdo Instance of PDO
-     * @link http://us.php.net/pdo
-     * @see PDB_Common::__call()
+     * Objects we accept
+     *
+     * @var array
      */
-    protected $pdo = null;
+    protected $acceptable = array('PDO' => 'PDO');
 
     /**
      * PDO DSN
@@ -156,12 +151,28 @@ abstract class PDB_Common
      */
     public function connect()
     {
-        $this->pdo = new PDO($this->dsn, 
-                             $this->user, 
-                             $this->pass, 
-                             $this->options);
-
+        $this->acceptDefault('PDO');
         $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+
+    /**
+     * Get the default connetion
+     *
+     * @return PDO
+     */
+    public function getDefaultPDO()
+    {
+        return new PDO($this->dsn, $this->user, $this->pass, $this->options);
+    }
+
+    /**
+     * We accepted a new PDO instance
+     *
+     * @return void
+     */
+    public function acceptedPDO($pdo)
+    {
+        return;
     }
 
     /**
@@ -187,7 +198,8 @@ abstract class PDB_Common
      */
     public function disconnect()
     {
-        $this->pdo = null;
+        $pdo = $this->getPDO();
+        $pdo = null;
     }
     
    /**
@@ -243,11 +255,25 @@ abstract class PDB_Common
      */
     public function __call($function, array $args = array()) 
     {
-        if (is_null($this->pdo)) {
-            throw new PDB_Exception('Not connected to DB');
+        static $whitelist;
+
+        if (!isset($whitelist)) {
+            $rc = new ReflectionClass('PDO');
+            foreach ($rc->getMethods() as $method) {
+                if ($method->isPublic()) {
+                    $whitelist[] = $method->getName();
+                }
+            }
         }
 
-        return call_user_func_array(array($this->pdo, $function), $args);
+        if (in_array($function, $whitelist)) {
+            if (is_null($this->getPDO())) {
+                throw new PDB_Exception('Not connected to DB');
+            }
+            return call_user_func_array(array($this->getPDO(), $function), $args);
+        }
+
+        return parent::__call($function, $args);
     }
 
     /**
@@ -290,7 +316,7 @@ abstract class PDB_Common
         try {
             $stmt = $this->prepare($sql, array(
                 PDO::ATTR_STATEMENT_CLASS => array(
-                    'PDB_Result', array($this->pdo, $this->fetchMode)
+                    'PDB_Result', array($this->getPDO(), $this->fetchMode)
                 )
             ));
 
@@ -526,12 +552,32 @@ abstract class PDB_Common
      */
     public function setAttribute($attribute, $value)
     {
-        if ($this->pdo->setAttribute($attribute, $value)) {
+        if ($attribute & PDB::PDB_ATTRS) {
+            $this->options[$attribute] = $value;
+            return true;
+        }
+
+        if ($this->getPDO()->setAttribute($attribute, $value)) {
             $this->options[$attribute] = $value;
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Get an attribute
+     *
+     * @param int $attr Attribute to get
+     *
+     * @return mixed Attribute value
+     */
+    public function getAttribute($attr)
+    {
+        if ($attr & PDB::PDB_ATTRS) {
+            return isset($this->options[$attr]) ? $this->options[$attr] : null;
+        }
+        return $this->getPDO()->getAttribute($attr);
     }
 }
 

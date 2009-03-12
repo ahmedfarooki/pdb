@@ -83,9 +83,11 @@ class PDB_mysql extends PDB_Common
         $attempts = 0;
         do {
             try {
-                return parent::query($sql, $args);
+                $res = parent::query($sql, $args);
+                return $res;
             } catch (PDB_Exception $e) {
-                if (strpos($e->getMessage(), '2006 MySQL') !== false) {
+                if (strpos($e->getMessage(), '2006 MySQL') !== false &&
+                    $this->getAttribute(PDB::RECONNECT)) {
                     $this->reconnect();
                 } else {
                     throw $e;
