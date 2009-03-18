@@ -189,6 +189,9 @@ abstract class PDB_Common extends Pattern_Acceptor_Common
     {
         $this->disconnect();
         $this->connect();
+        foreach ($this->options as $attr => $val) {
+            $this->setAttribute($attr, $val);
+        }
     }
 
     /**
@@ -267,10 +270,8 @@ abstract class PDB_Common extends Pattern_Acceptor_Common
         }
 
         if (in_array($function, $whitelist)) {
-            if (is_null($this->getPDO())) {
-                throw new PDB_Exception('Not connected to DB');
-            }
-            return call_user_func_array(array($this->getPDO(), $function), $args);
+            return call_user_func_array(array($this->getPDO(), $function),
+                                        $args);
         }
 
         return parent::__call($function, $args);
@@ -333,7 +334,8 @@ abstract class PDB_Common extends Pattern_Acceptor_Common
             $stmt->execute();
             return $stmt;
         } catch (PDOException $error) {
-            throw new PDB_Exception($error->getMessage(), (int) $error->getCode());
+            throw new PDB_Exception($error->getMessage(),
+                                    (int) $error->getCode());
         }
     }
 
