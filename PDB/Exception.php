@@ -55,7 +55,7 @@
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/PDB
  */
-class PDB_Exception extends Exception
+class PDB_Exception extends PDOException
 {
 
 }
