@@ -22,9 +22,9 @@
         <email>ian@digg.com</email>
         <active>yes</active>
     </lead>
-    <date>2009-03-18</date>
+    <date>2009-04-16</date>
     <version>
-        <release>0.5.0RC2</release>
+        <release>0.5.0RC3</release>
         <api>0.5.0</api>
     </version>
     <stability>
@@ -33,11 +33,7 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes>
-        Refactor after code review:
-        - Depend on Pattern-1.3.0RC3 for it's `unaccept()` method.
-        - Remove `is_null()` test in `PDB_Common::__call()` - we'll always get an instance from `getPDO()`.
-        - Reset PDO attributes in `reconnect()`
-        - Fix dumb change in `PDB_mysql::query()` where I assigned the value then returned it.
+        - PDB_Exception now extends PDOException, rather than Exception. (ieure)
     </notes>
     <contents>
         <dir name="/">
